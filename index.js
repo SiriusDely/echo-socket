@@ -27,3 +27,10 @@ wss.on('connection', function connection(ws, req) {
 server.listen(8080, function listening() {
   console.log('Listening on %d', server.address().port);
 });
+
+setInterval(function() {
+  console.log('ping');
+  wss.clients.forEach(function(ws) {
+    ws.ping(null, {}, true);
+  });
+}, 120000);
